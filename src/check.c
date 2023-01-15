@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
-static void	check_limits(char **v)
+static int	check_limits(char **v)
 {
 	int			i;
 	int			j;
@@ -32,11 +32,12 @@ static void	check_limits(char **v)
 		}
 		i++;
 		if (check < -2147483648 || check > 2147483647)
-			write_error(NULL, v);
+			return (0);
 	}
+	return (1);
 }
 
-static void	check_singularity(char **v)
+static int	check_singularity(char **v)
 {
 	int	i;
 	int	j;
@@ -48,14 +49,15 @@ static void	check_singularity(char **v)
 		while (v[j])
 		{
 			if (ft_atoi(v[i]) == ft_atoi(v[j]))
-				write_error(NULL, v);
+				return (0);
 			j++;
 		}
 		i++;
 	}
+	return (1);
 }
 
-static void	check_ints(char **v)
+static int	check_ints(char **v)
 {
 	int			i;
 	int			j;
@@ -69,27 +71,27 @@ static void	check_ints(char **v)
 		while (v[i][j])
 		{
 			if (!ft_isdigit(v[i][j]))
-				write_error(NULL, v);
+				return (0);
 			j++;
 		}
 		i++;
 	}
+	return (1);
 }
 
-void	check(char **v)
+void	check(t_table *t)
 {
-	check_ints(v);
-	check_limits(v);
-	check_singularity(v);
+	if (check_ints(t->v) == 0
+		|| check_limits(t->v) == 0
+		|| check_singularity(t->v) == 0)
+		write_error(&t);
 }
 
-void	write_error(t_table **t, char **v)
+void	write_error(t_table **t)
 {
 	write(1, "Error\n", 6);
-	free_vector(v);
 	if (!t)
 		exit(EXIT_FAILURE);
 	free_table(*t);
-
 	exit(EXIT_FAILURE);
 }

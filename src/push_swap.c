@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	place_in_a(t_table *t)
 {
@@ -34,7 +34,7 @@ void	place_in_a(t_table *t)
 void	place_in_b(t_table *t)
 {
 	t_circular	*tail;
-	int	len;
+	int			len;
 
 	tail = t->a->prev;
 	len = list_len(t->a);

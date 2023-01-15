@@ -6,7 +6,7 @@
 /*   By: itopchu <itopchu@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/17 14:55:14 by itopchu       #+#    #+#                 */
-/*   Updated: 2023/01/11 19:20:25 by itopchu       ########   odam.nl         */
+/*   Updated: 2023/01/15 18:35:52 by itopchu       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_table
 {
 	struct s_circular	*a;
 	struct s_circular	*b;
+	char				**v;
 }				t_table;
 
 /*==================================*/
@@ -47,8 +48,8 @@ void		swap(t_table *t, char c);
 /*==================================*/
 void		free_vector(char **v);
 int			len_vector(char **v);
-void		check(char **v);
-void		write_error(t_table **t, char **v);
+void		check(t_table *t);
+void		write_error(t_table **t);
 void		free_table(t_table *t);
 void		free_list(t_circular *l);
 int			sorted(t_circular *l, char c);
@@ -70,6 +71,7 @@ t_circular	*smallest(t_circular *src);
 /*==================================*/
 /*				MAIN				*/
 /*==================================*/
+char		**fill_vector(char **v, int ac);
 int			main(int ac, char **av);
 /*==================================*/
 /*				PUSH_SWAP			*/

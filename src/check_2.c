@@ -10,14 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	free_vector(char **v)
 {
-	while (*v)
+	int	i;
+
+	if (!v)
+		return ;
+	i = 0;
+	while (v[i])
 	{
-		free(*v);
-		v++;
+		free(v[i]);
+		i++;
 	}
 	free(v);
 }
@@ -80,5 +85,6 @@ void	free_table(t_table *t)
 		return ;
 	free_list(t->a);
 	free_list(t->b);
+	free_vector(t->v);
 	free(t);
 }

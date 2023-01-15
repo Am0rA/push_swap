@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 t_circular	*new_node(int value)
 {
 	t_circular	*new;
 
-	// new = (t_circular *)malloc(sizeof(t_circular));
-	new = NULL;
+	new = (t_circular *)malloc(sizeof(t_circular));
 	if (!new)
 		return (NULL);
 	new->next = new;
@@ -82,17 +81,21 @@ t_table	*table_init(int ac, char **av)
 	t_circular	*add;
 	int			i;
 
-	i = ac;
 	table = malloc(sizeof(t_table));
 	if (!table)
-		write_error(NULL, av);
+		write_error(NULL);
 	table->a = NULL;
 	table->b = NULL;
+	table->v = fill_vector(av, ac);
+	if (!(table->v))
+		write_error(&table);
+	check(table);
+	i = len_vector(table->v) - 1;
 	while (i >= 0)
 	{
-		add = new_node(ft_atoi(av[i]));
+		add = new_node(ft_atoi(table->v[i]));
 		if (!add)
-			write_error(&table, av);
+			write_error(&table);
 		table->a = insert(&(table->a), &add);
 		i--;
 	}
